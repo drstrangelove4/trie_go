@@ -121,6 +121,20 @@ func print_trie_frontend(root *trie_node) {
 
 // --------------------------------------------------------------------------------------------------------------------
 
+func search_word_frontend(root *trie_node) {
+	// User facing function that takes input and calls the search for word function.
+
+	screen.Clear()
+	screen.MoveTopLeft()
+
+	// Take user input
+	user_input := take_input_string("Enter a word to search for:\n--------------------")
+	search_word(root, user_input)
+	continue_()
+	menu(root)
+}
+
+// --------------------------------------------------------------------------------------------------------------------
 func select_option(root *trie_node, choice int) {
 
 	// Converts user input into a function call.
@@ -143,21 +157,6 @@ func select_option(root *trie_node, choice int) {
 	default:
 		menu(root)
 	}
-}
-
-// --------------------------------------------------------------------------------------------------------------------
-
-func search_word_frontend(root *trie_node) {
-	// User facing function that takes input and calls the search for word function.
-
-	screen.Clear()
-	screen.MoveTopLeft()
-
-	// Take user input
-	user_input := take_input_string("Enter a word to search for:\n--------------------")
-	search_word(root, user_input)
-	continue_()
-	menu(root)
 }
 
 // --------------------------------------------------------------------------------------------------------------------
