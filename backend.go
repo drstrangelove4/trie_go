@@ -67,14 +67,12 @@ func check_children(node *trie_node) bool {
 func convert_hash(hash_array []int) string {
 	// Takes an array of integers and converts them into runes, building them into a string.
 
-	// A numberic value we want to add to each word to convert back from a hash value to a rune.
-	a_rune := int(rune('a'))
-
-	// Return string
+	// Return string.
 	var return_string string
 
+	// Convert the word from an integer > rune > string and add it to the return string.
 	for i := 0; i < len(hash_array); i++ {
-		return_string += string(rune(a_rune + hash_array[i]))
+		return_string += string(rune(hash_array[i]))
 	}
 	return return_string
 }
@@ -139,15 +137,12 @@ func edit_node(root *trie_node, new_word string, old_word string) {
 // --------------------------------------------------------------------------------------------------------------------
 
 func hash_rune(char rune) (int, error) {
-	// Takes an alphabetical rune and converts it to an integer value between 0-25.
+	// Takes an alphabetical rune and converts it to an integer value between 0-255.
 
-	// Get the integer value of the rune 'a'.
-	a_rune := rune('a')
-
-	// Convert the letter to a number between 0 and 25. This will give us an index value for the current rune. Indexes
-	// outside of 0 to 25 throws an error (the user passed a non alphabetic rune to the function).
-	result := int(char) - int(a_rune)
-	if result < 0 || result > 25 {
+    //This will give us an index value for the current rune. Indexes outside of 0 to 255 throws an error (outside ascii
+	// character set).
+	result := int(char) 
+	if result < 0 || result > LETTERS - 1 {
 		return result, errors.New("index out of range")
 	} else {
 		return result, nil
